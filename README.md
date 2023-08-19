@@ -9,28 +9,11 @@ This codebase was created to demonstrate a realworld backend application built w
 
 # Getting started
 
-This Project requries Java 17, Maven, and a running Couchbase Server instance. See the Setup Couchbase section for more details.
+This Project requires Java 17, Maven, and a running Couchbase Server instance. See the Setup Couchbase section for more details on how to setup a Couchbase instance.
 
 ## Configuration
 
-This project needs a configured Couchbase configuration to run properly. There are different ways you can do it. Provide a properties file with the following content:
-
-```properties
-couchbase.connectionString=couchbase://localhost
-couchbase.username=Administrator
-couchbase.password=password
-couchbase.defaultBucket=default
-couchbase.defaultScope=_default
-```
-
-or make sure you have the following environment variables configured:
-```
-export COUCHBASE_CONNECTIONSTRING=couchbase://localhost
-export COUCHBASE_USERNAME=Administrator
-export COUCHBASE_PASSWORD=password
-export COUCHBASE_DEFAULTBUCKET=default
-export COUCHBASE_DEFAULTSCOPE=_default
-```
+This project needs a configured Couchbase configuration to run properly. The configuration is currently defined in `application.properties`
 
 ### Test Configuration
 
@@ -43,23 +26,30 @@ EMAIL=useremail@domain.com
 PASSWORD=userPass
 ```
 
-## Run
-
-1. Run `mvn package` in the project folder to build the project
-1. Run `java --add-opens java.base/java.lang=ALL-UNNAMED -jar target/*.jar`
-2. Run `./postman/run-api-tests.sh` to run Postman collection tests
-
-The reason we need to add the `--add-opens java.base/java.lang=ALL-UNNAMED` parameters can be found on this article: https://www.springcloud.io/post/2022-07/inaccessibleobjectexception/
-
 ## Setup Couchbase
 
-There are multiple ways to create a Couchbase instance.
+There are multiple ways to create a Couchbase instance. Below describes a couple of ways to run Couchbase.
 
 ### Using Docker
 
-You can use our [official Docker image](https://hub.docker.com/_/couchbase) by running `docker run -d --name db -p 8091-8097:8091-8097 -p 9123:9123 -p 11207:11207 -p 11210:11210 -p 11280:11280 -p 18091-18097:18091-18097 couchbase`
-Then you can go to http://localhost:8091 and start setting up your cluster. Take a look at the hub page for more details.
+If you have Docker installed, you can run `docker-compose up` to start the Couchbase instance locally. Then you can go to http://localhost:8091 to manage the Couchbase instance. 
+
+#### First Time Setup
+
+ If this is the first time starting Couchbase, you need to do the following:
+ 
+ - Create the Administrator account with the password of `password`
+ - Create a bucket named `default`
 
 ### Using Couchbase Capella
 
-Go to https://cloud.couchbase.com. From there you can setup a trial account and get a 30days free instance, no Credit Card required. Check out our getting started here:
+If you don't want to use Docker to run a Couchbase instance locally, you can go to https://cloud.couchbase.com. From there you can setup a trial account and get a 30 days free instance.
+
+## Run
+
+ - Make sure the Couchbase instance is running. 
+ - Run `mvn package` in the project folder to build the project 
+ - Run `java --add-opens java.base/java.lang=ALL-UNNAMED -jar target/*.jar`
+ - Run `./postman/run-api-tests.sh` to run Postman collection tests
+
+The reason we need to add the `--add-opens java.base/java.lang=ALL-UNNAMED` parameters can be found on this article: https://www.springcloud.io/post/2022-07/inaccessibleobjectexception/
