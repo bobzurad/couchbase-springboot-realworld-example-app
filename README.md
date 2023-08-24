@@ -32,7 +32,7 @@ There are multiple ways to create a Couchbase instance. Below describes a couple
 
 ### Using Docker
 
-If you have Docker installed, you can run `docker-compose up` to start the Couchbase instance locally. Then you can go to http://localhost:8091 to manage the Couchbase instance. 
+If you have Docker installed, you can run `docker-compose -f ./docker/docker-compose.yml up` to start the Couchbase instance locally. Then you can go to http://localhost:8091 to manage the Couchbase instance. 
 
 #### First Time Setup
 
